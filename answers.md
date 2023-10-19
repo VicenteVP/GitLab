@@ -51,12 +51,16 @@ git checkout test
 git merge top_N
 ```
 
+The branch test would take in all the changes made to top_N. This will be done using a Fast Forward merge, as top_N is tracking test.
+
 6. What do you think would happen if you ran the following commands?
 What branches would change, and how?
 ```
 git checkout top_ten
 git merge test
 ```
+
+Here top_ten would take in the "changes" made to the branch test. It will do this using the recursive approach, and works because top_ten tracks test.
 
 7. What do you think would happen if you ran the following commands?
 What branches would change, and how?
@@ -65,3 +69,5 @@ git checkout test
 git rebase top_ten
 git rebase top_N
 ```
+
+Here, we encounter a merge conflict. This is because we're first rebasing top_ten onto test, which should make the branch test identical to top_ten (and works because top_ten tracks test!). The problem arises when we then try to rebase top_N onto test, as git won't know whether to keep the changes that came from the first rebase, or accept the changes coming from the second rebase. That is why we have to manually resolve the merge conflict.
